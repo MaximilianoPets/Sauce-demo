@@ -1,0 +1,11 @@
+# Node modules
+node_modules/
+.env
+# Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/cache/
+
+# Allure
+allure-results/
+allure-report/
