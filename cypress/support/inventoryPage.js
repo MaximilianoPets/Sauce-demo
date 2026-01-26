@@ -10,16 +10,20 @@ export class Inventorypage {
 
     validarPaginaInventory() {
         cy.get(this.tituloPagina).should('have.text', 'Products');
+        return this;
     }
 
     agregarSauceLabsBikeLightAlCarrito() {
         cy.get(this.botonAgregarBikeLight).click();
+        return this;
     }
     agregarSauceLabsBackpackAlCarritoError() {
         cy.get(this.botonAgregarBackpackError).click();
+        return this;
     }
 
     irAlCarrito() {
         cy.get(this.botonCarrito).click();
+        return this;
     }
 }

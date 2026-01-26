@@ -12,6 +12,7 @@ export class CheckoutPage {
 
     validarUrlCheckout() {
         cy.url().should('eq', this.urlCheckoutStepTwo);
+        return this;
     }
 
     validarCalculoTotal() {
@@ -47,6 +48,6 @@ export class CheckoutPage {
                     });
             });
 
-
+        return this;
     }
 }

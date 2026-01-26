@@ -12,41 +12,47 @@ const checkoutPage = new CheckoutPage();
 
 describe('Login', () => {
 
-    beforeEach(() => {
-        loginPage.visitarPagina();
-        loginPage.escribirUsuario(loginPage.usuarioValido.usuario);
-        loginPage.escribirPassword(loginPage.usuarioValido.password);
-        loginPage.hacerClickEnLogin();
-        loginPage.validarLoginExitoso();
+  beforeEach(() => {
+    loginPage
+      .visitarPagina()
+      .escribirUsuario(loginPage.usuarioValido.usuario)
+      .escribirPassword(loginPage.usuarioValido.password)
+      .hacerClickEnLogin()
+      .validarLoginExitoso();
+  });
+
+  it('T14-Validar cálculo de Item Total + Tax, la suma coincide con el total mostrado', () => {
+
+    cy.fixture('data').then((datos) => {
+
+      inventoryPage
+        .validarPaginaInventory()
+        .agregarSauceLabsBikeLightAlCarrito()
+        .irAlCarrito();
+
+      cartPage
+        .validarProductoEnCarrito()
+        .hacerClickEnCheckout();
+
+      informationPage
+        .validarUrlInformation()
+        .escribirNombre(datos.nombre)
+        .escribirApellido(datos.apellido)
+        .escribirCodigoPostal(datos.codigoPostal)
+        .hacerClickEnContinue();
+
+      checkoutPage
+        .validarUrlCheckout()
+        .validarCalculoTotal();
     });
+  });
 
-    it('T14-Validar cálculo de Item Total + Tax, la suma coincide con el total mostrado', () => {
+  it('T6-Agregar un producto al carrito', () => {
 
-        cy.fixture('data').then((datos) => {
-
-            inventoryPage.validarPaginaInventory();
-            inventoryPage.agregarSauceLabsBikeLightAlCarrito();
-            inventoryPage.irAlCarrito();
-
-            cartPage.validarProductoEnCarrito();
-            cartPage.hacerClickEnCheckout();
-
-            informationPage.validarUrlInformation();
-            informationPage.escribirNombre(datos.nombre);
-            informationPage.escribirApellido(datos.apellido);
-            informationPage.escribirCodigoPostal(datos.codigoPostal);
-            informationPage.hacerClickEnContinue();
-
-            checkoutPage.validarUrlCheckout();
-            checkoutPage.validarCalculoTotal();
-        });
-    });
-
-    it('T6-Agregar un producto al carrito', () => {
-        inventoryPage.validarPaginaInventory();
-        inventoryPage.agregarSauceLabsBackpackAlCarritoError();
-        inventoryPage.irAlCarrito();
-
-    });
-
+    inventoryPage
+      .validarPaginaInventory()
+      .agregarSauceLabsBackpackAlCarritoError()
+      .irAlCarrito();
+  });
 });
+
