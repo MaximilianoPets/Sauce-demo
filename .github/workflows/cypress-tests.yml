@@ -96,6 +96,11 @@ jobs:
           echo "El reporte de Allure está disponible en:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "🔗 https://maximilianopets.github.io/Sauce-demo/allure-report/" >> $GITHUB_STEP_SUMMARY
+          echo ""
+          echo "======================================"
+          echo "📊 Allure Report disponible en:"
+          echo "🔗 https://maximilianopets.github.io/Sauce-demo/allure-report/"
+          echo "======================================"
 
       - name: Upload Allure Report
         if: always()
