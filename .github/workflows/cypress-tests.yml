@@ -2,13 +2,15 @@ name: Cypress Tests
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ '**' ]
   pull_request:
     branches: [ main, master, develop ]
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout
@@ -23,25 +25,82 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Cypress tests
+      - name: Run Login tests
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
           config-file: cypress.config.js
+          spec: cypress/e2e/logIn/logIn.cy.js
+          install: false
         env:
-          BASE_URL: ${{ secrets.BASE_URL || 'https://www.saucedemo.com' }}
-          USER_VALID: ${{ secrets.USER_VALID || 'standard_user' }}
-          PASSWORD_VALID: ${{ secrets.PASSWORD_VALID || 'secret_sauce' }}
-          USER_LOCKED: ${{ secrets.USER_LOCKED || 'locked_out_user' }}
-          PASSWORD_LOCKED: ${{ secrets.PASSWORD_LOCKED || 'secret_sauce' }}
-          USER_ERROR: ${{ secrets.USER_ERROR || 'error_user' }}
-          PASSWORD_ERROR: ${{ secrets.PASSWORD_ERROR || 'secret_sauce' }}
+          CYPRESS_BASE_URL: ${{ secrets.BASE_URL }}
+          CYPRESS_USER_VALID: ${{ secrets.USER_VALID }}
+          CYPRESS_PASSWORD_VALID: ${{ secrets.PASSWORD_VALID }}
+          CYPRESS_USER_LOCKED: ${{ secrets.USER_LOCKED }}
+          CYPRESS_PASSWORD_LOCKED: ${{ secrets.PASSWORD_LOCKED }}
+          CYPRESS_USER_ERROR: ${{ secrets.USER_ERROR }}
+          CYPRESS_PASSWORD_ERROR: ${{ secrets.PASSWORD_ERROR }}
+
+      - name: Run Productos tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          config-file: cypress.config.js
+          spec: cypress/e2e/inventario/productos.cy.js
+          install: false
+        env:
+          CYPRESS_BASE_URL: ${{ secrets.BASE_URL }}
+          CYPRESS_USER_VALID: ${{ secrets.USER_VALID }}
+          CYPRESS_PASSWORD_VALID: ${{ secrets.PASSWORD_VALID }}
+          CYPRESS_USER_LOCKED: ${{ secrets.USER_LOCKED }}
+          CYPRESS_PASSWORD_LOCKED: ${{ secrets.PASSWORD_LOCKED }}
+          CYPRESS_USER_ERROR: ${{ secrets.USER_ERROR }}
+          CYPRESS_PASSWORD_ERROR: ${{ secrets.PASSWORD_ERROR }}
+
+      - name: Run Carrito de Compras tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          config-file: cypress.config.js
+          spec: cypress/e2e/carritoDeCompras/carritoDeCompras.cy.js
+          install: false
+        env:
+          CYPRESS_BASE_URL: ${{ secrets.BASE_URL }}
+          CYPRESS_USER_VALID: ${{ secrets.USER_VALID }}
+          CYPRESS_PASSWORD_VALID: ${{ secrets.PASSWORD_VALID }}
+          CYPRESS_USER_LOCKED: ${{ secrets.USER_LOCKED }}
+          CYPRESS_PASSWORD_LOCKED: ${{ secrets.PASSWORD_LOCKED }}
+          CYPRESS_USER_ERROR: ${{ secrets.USER_ERROR }}
+          CYPRESS_PASSWORD_ERROR: ${{ secrets.PASSWORD_ERROR }}
 
       - name: Generate Allure Report
         if: always()
         run: |
           npm install -g allure-commandline
           allure generate allure-results --clean -o allure-report
+
+      - name: Deploy Allure Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          destination_dir: allure-report
+          keep_files: true
+
+      - name: Generate Report Summary
+        if: always()
+        run: |
+          echo "## 📊 Allure Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "El reporte de Allure está disponible en:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 https://maximilianopets.github.io/Sauce-demo/allure-report/" >> $GITHUB_STEP_SUMMARY
+          echo ""
+          echo "======================================"
+          echo "📊 Allure Report disponible en:"
+          echo "🔗 https://maximilianopets.github.io/Sauce-demo/allure-report/"
+          echo "======================================"
 
       - name: Upload Allure Report
         if: always()
