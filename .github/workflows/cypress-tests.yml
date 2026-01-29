@@ -29,13 +29,13 @@ jobs:
           browser: chrome
           config-file: cypress.config.js
         env:
-          BASE_URL: ${{ secrets.BASE_URL }}
-          USER_VALID: ${{ secrets.USER_VALID }}
-          PASSWORD_VALID: ${{ secrets.PASSWORD_VALID }}
-          USER_LOCKED: ${{ secrets.USER_LOCKED }}
-          PASSWORD_LOCKED: ${{ secrets.PASSWORD_LOCKED }}
-          USER_ERROR: ${{ secrets.USER_ERROR }}
-          PASSWORD_ERROR: ${{ secrets.PASSWORD_ERROR }}
+          CYPRESS_BASE_URL: ${{ secrets.BASE_URL }}
+          CYPRESS_USER_VALID: ${{ secrets.USER_VALID }}
+          CYPRESS_PASSWORD_VALID: ${{ secrets.PASSWORD_VALID }}
+          CYPRESS_USER_LOCKED: ${{ secrets.USER_LOCKED }}
+          CYPRESS_PASSWORD_LOCKED: ${{ secrets.PASSWORD_LOCKED }}
+          CYPRESS_USER_ERROR: ${{ secrets.USER_ERROR }}
+          CYPRESS_PASSWORD_ERROR: ${{ secrets.PASSWORD_ERROR }}
 
       - name: Generate Allure Report
         if: always()
