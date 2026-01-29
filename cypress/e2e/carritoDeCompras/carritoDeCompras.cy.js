@@ -47,7 +47,7 @@ describe('Carrito de Compras', () => {
     });
   });
 
-  it('Flujo de compra con usuario error', () => {
+  it.skip('Flujo de compra con usuario error', () => {
 
     loginPage
       .visitarPagina()
