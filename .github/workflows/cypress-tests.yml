@@ -2,7 +2,7 @@ name: Cypress Tests
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ '**' ]
   pull_request:
     branches: [ main, master, develop ]
 
@@ -29,13 +29,13 @@ jobs:
           browser: chrome
           config-file: cypress.config.js
         env:
-          BASE_URL: ${{ secrets.BASE_URL || 'https://www.saucedemo.com' }}
-          USER_VALID: ${{ secrets.USER_VALID || 'standard_user' }}
-          PASSWORD_VALID: ${{ secrets.PASSWORD_VALID || 'secret_sauce' }}
-          USER_LOCKED: ${{ secrets.USER_LOCKED || 'locked_out_user' }}
-          PASSWORD_LOCKED: ${{ secrets.PASSWORD_LOCKED || 'secret_sauce' }}
-          USER_ERROR: ${{ secrets.USER_ERROR || 'error_user' }}
-          PASSWORD_ERROR: ${{ secrets.PASSWORD_ERROR || 'secret_sauce' }}
+          BASE_URL: ${{ secrets.BASE_URL }}
+          USER_VALID: ${{ secrets.USER_VALID }}
+          PASSWORD_VALID: ${{ secrets.PASSWORD_VALID }}
+          USER_LOCKED: ${{ secrets.USER_LOCKED }}
+          PASSWORD_LOCKED: ${{ secrets.PASSWORD_LOCKED }}
+          USER_ERROR: ${{ secrets.USER_ERROR }}
+          PASSWORD_ERROR: ${{ secrets.PASSWORD_ERROR }}
 
       - name: Generate Allure Report
         if: always()
