@@ -1,7 +1,6 @@
 const { defineConfig } = require("cypress");
 const allureWriter = require("@shelex/cypress-allure-plugin/writer");
 
-// Cargar variables del .env local
 require('dotenv').config();
 
 module.exports = defineConfig({
@@ -17,7 +16,9 @@ module.exports = defineConfig({
       USER_VALID: process.env.CYPRESS_USER_VALID,
       PASSWORD_VALID: process.env.CYPRESS_PASSWORD_VALID,
       USER_LOCKED: process.env.CYPRESS_USER_LOCKED,
-      PASSWORD_LOCKED: process.env.CYPRESS_PASSWORD_LOCKED
+      PASSWORD_LOCKED: process.env.CYPRESS_PASSWORD_LOCKED,
+      USER_ERROR: process.env.CYPRESS_USER_ERROR,
+      PASSWORD_ERROR: process.env.CYPRESS_PASSWORD_ERROR
     },
 
     setupNodeEvents(on, config) {

@@ -10,7 +10,7 @@ const cartPage = new CartPage();
 const informationPage = new InformationPage();
 const checkoutPage = new CheckoutPage();
 
-describe('Login', () => {
+describe('Carrito de Compras', () => {
 
   beforeEach(() => {
     loginPage
@@ -21,7 +21,7 @@ describe('Login', () => {
       .validarLoginExitoso();
   });
 
-  it('T14-Validar cálculo de Item Total + Tax, la suma coincide con el total mostrado', () => {
+  it('Validar cálculo de Item Total + Tax, la suma coincide con el total mostrado', () => {
 
     cy.fixture('data').then((datos) => {
 
@@ -47,12 +47,36 @@ describe('Login', () => {
     });
   });
 
-  it('T6-Agregar un producto al carrito', () => {
+  it.skip('Flujo de compra con usuario error', () => {
 
-    inventoryPage
-      .validarPaginaInventory()
-      .agregarSauceLabsBackpackAlCarritoError()
-      .irAlCarrito();
+    loginPage
+      .visitarPagina()
+      .escribirUsuario(loginPage.usuarioError.usuario)
+      .escribirPassword(loginPage.usuarioError.password)
+      .hacerClickEnLogin();
+
+    cy.fixture('data').then((datos) => {
+
+      inventoryPage
+        .validarPaginaInventory()
+        .agregarSauceLabsBikeLightAlCarrito()
+        .irAlCarrito();
+
+      cartPage
+        .validarProductoEnCarrito()
+        .hacerClickEnCheckout();
+
+      informationPage
+        .validarUrlInformation()
+        .escribirNombre(datos.nombre)
+        .escribirApellido(datos.apellido)
+        .escribirCodigoPostal(datos.codigoPostal)
+        .hacerClickEnContinue();
+
+      checkoutPage
+        .validarUrlCheckout()
+        .validarCalculoTotal();
+    });
   });
 });
 

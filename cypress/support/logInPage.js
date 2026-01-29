@@ -15,6 +15,11 @@ export class LoginPage {
             usuario: Cypress.env('USER_LOCKED'),
             password: Cypress.env('PASSWORD_LOCKED')
         };
+
+        this.usuarioError = {
+            usuario: Cypress.env('USER_ERROR'),
+            password: Cypress.env('PASSWORD_ERROR')
+        };
     }
 
     visitarPagina() {
