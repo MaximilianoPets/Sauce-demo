@@ -88,6 +88,15 @@ jobs:
           destination_dir: allure-report
           keep_files: true
 
+      - name: Generate Report Summary
+        if: always()
+        run: |
+          echo "## 📊 Allure Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "El reporte de Allure está disponible en:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 https://maximilianopets.github.io/Sauce-demo/allure-report/" >> $GITHUB_STEP_SUMMARY
+
       - name: Upload Allure Report
         if: always()
         uses: actions/upload-artifact@v4
