@@ -31,6 +31,17 @@ cp .env.example .env
 
 ## ▶️ Comandos de Ejecución
 
+### Ejecutar tests en orden secuencial
+```bash
+./run-tests.sh
+```
+Este script ejecuta los tests en el siguiente orden:
+1. Login
+2. Productos
+3. Carrito de Compras
+
+Y al finalizar genera y abre el reporte de Allure automáticamente.
+
 ### Ejecutar tests en Chrome
 ```
 npm run test:chrome
@@ -59,6 +70,19 @@ npm run allure:generate
 ```
 npm run allure:open
 ```
+
+## 🔄 CI/CD - GitHub Actions
+
+El proyecto incluye un workflow de GitHub Actions que se ejecuta automáticamente en cada push. El workflow:
+
+- ✅ Ejecuta los tests en orden secuencial (Login → Productos → Carrito)
+- 📊 Genera reportes de Allure automáticamente
+- 🌐 Publica los reportes en GitHub Pages
+- 📸 Guarda screenshots y videos en caso de fallos
+
+**Reporte en vivo:** https://maximilianopets.github.io/Sauce-demo/allure-report/
+
+
 
 
 ## 🔐 Variables de Entorno
