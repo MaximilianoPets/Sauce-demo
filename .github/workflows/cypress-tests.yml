@@ -25,11 +25,45 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Cypress tests
+      - name: Run Login tests
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
           config-file: cypress.config.js
+          spec: cypress/e2e/logIn/logIn.cy.js
+          install: false
+        env:
+          CYPRESS_BASE_URL: ${{ secrets.BASE_URL }}
+          CYPRESS_USER_VALID: ${{ secrets.USER_VALID }}
+          CYPRESS_PASSWORD_VALID: ${{ secrets.PASSWORD_VALID }}
+          CYPRESS_USER_LOCKED: ${{ secrets.USER_LOCKED }}
+          CYPRESS_PASSWORD_LOCKED: ${{ secrets.PASSWORD_LOCKED }}
+          CYPRESS_USER_ERROR: ${{ secrets.USER_ERROR }}
+          CYPRESS_PASSWORD_ERROR: ${{ secrets.PASSWORD_ERROR }}
+
+      - name: Run Productos tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          config-file: cypress.config.js
+          spec: cypress/e2e/inventario/productos.cy.js
+          install: false
+        env:
+          CYPRESS_BASE_URL: ${{ secrets.BASE_URL }}
+          CYPRESS_USER_VALID: ${{ secrets.USER_VALID }}
+          CYPRESS_PASSWORD_VALID: ${{ secrets.PASSWORD_VALID }}
+          CYPRESS_USER_LOCKED: ${{ secrets.USER_LOCKED }}
+          CYPRESS_PASSWORD_LOCKED: ${{ secrets.PASSWORD_LOCKED }}
+          CYPRESS_USER_ERROR: ${{ secrets.USER_ERROR }}
+          CYPRESS_PASSWORD_ERROR: ${{ secrets.PASSWORD_ERROR }}
+
+      - name: Run Carrito de Compras tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          config-file: cypress.config.js
+          spec: cypress/e2e/carritoDeCompras/carritoDeCompras.cy.js
+          install: false
         env:
           CYPRESS_BASE_URL: ${{ secrets.BASE_URL }}
           CYPRESS_USER_VALID: ${{ secrets.USER_VALID }}
