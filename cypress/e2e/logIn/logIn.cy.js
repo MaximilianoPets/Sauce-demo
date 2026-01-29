@@ -8,7 +8,7 @@ describe('Login', () => {
     loginPage.visitarPagina();
   });
 
-  it('T1-Login con credenciales válidas', () => {
+  it('Login con credenciales válidas', () => {
 
     loginPage
       .escribirUsuario(loginPage.usuarioValido.usuario)
@@ -17,13 +17,21 @@ describe('Login', () => {
       .validarLoginExitoso();
   });
 
-  it('T5-Login con usuario bloqueado', () => {
+  it('Login con usuario bloqueado', () => {
 
     loginPage
       .escribirUsuario(loginPage.usuarioBloqueado.usuario)
       .escribirPassword(loginPage.usuarioBloqueado.password)
       .hacerClickEnLogin()
       .validarMensajeUsuarioBloqueado();
+  });
+
+  it('Login con usuario error', () => {
+
+    loginPage
+      .escribirUsuario(loginPage.usuarioError.usuario)
+      .escribirPassword(loginPage.usuarioError.password)
+      .hacerClickEnLogin();
   });
 });
 

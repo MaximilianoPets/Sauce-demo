@@ -1,5 +1,3 @@
-# Challenge SpaceGuru
-
 Framework de pruebas automatizadas con Cypress y Allure para navegadores Chrome y Edge.
 
 ## 🚀 Tecnologías Utilizadas
@@ -29,14 +27,7 @@ Duplica el archivo `.env.example` y renómbralo a `.env`:
 cp .env.example .env
 ```
 
-3. Edita el archivo `.env` con tus credenciales:
-```
-CYPRESS_BASE_URL=https://www.saucedemo.com
-CYPRESS_USER_VALID=standard_user
-CYPRESS_PASSWORD_VALID=secret_sauce
-CYPRESS_USER_LOCKED=locked_out_user
-CYPRESS_PASSWORD_LOCKED=secret_sauce
-```
+3. Edita el archivo `.env` con tus credenciales según las variables descritas en la sección "Variables de Entorno" más abajo.
 
 ## ▶️ Comandos de Ejecución
 
@@ -79,6 +70,8 @@ El proyecto utiliza variables de entorno para manejar datos sensibles y configur
 - `CYPRESS_PASSWORD_VALID` - Contraseña válida
 - `CYPRESS_USER_LOCKED` - Usuario bloqueado para pruebas negativas
 - `CYPRESS_PASSWORD_LOCKED` - Contraseña del usuario bloqueado
+- `CYPRESS_USER_ERROR` - Usuario con errores para pruebas específicas
+- `CYPRESS_PASSWORD_ERROR` - Contraseña del usuario error
 
 **Nota:** El archivo `.env` está incluido en `.gitignore` para proteger información sensible.
 
